@@ -1,0 +1,9 @@
+=DataWarehouse
+Encuesta Continua de Hogares
+
+
+=== WorkBench
+Para cargar el import.sql o cualquier script:
+
+    mysql -ppassword ECH_DW < import.sql
+
