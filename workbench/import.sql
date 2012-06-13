@@ -7,15 +7,15 @@ CREATE SCHEMA IF NOT EXISTS `ECH_DW` DEFAULT CHARACTER SET latin1 COLLATE latin1
 USE `ECH_DW` ;
 
 -- -----------------------------------------------------
--- Table `ECH_DW`.`hogares`
+-- Table `ECH_DW`.`tiposVivienda`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ECH_DW`.`hogares` ;
+DROP TABLE IF EXISTS `ECH_DW`.`tiposVivienda` ;
 
-CREATE  TABLE IF NOT EXISTS `ECH_DW`.`hogares` (
-  `idHogar` INT NOT NULL ,
+CREATE  TABLE IF NOT EXISTS `ECH_DW`.`tiposVivienda` (
+  `idTiposVivienda` INT NOT NULL ,
   `tipo` INT NULL ,
-  PRIMARY KEY (`idHogar`) ,
-  UNIQUE INDEX `idHogares_UNIQUE` (`idHogar` ASC) )
+  PRIMARY KEY (`idTiposVivienda`) ,
+  UNIQUE INDEX `idTiposVivienda_UNIQUE` (`idTiposVivienda` ASC) )
 ENGINE = InnoDB;
 
 
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `ECH_DW`.`infoHogares` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `idInfoHogar` INT NOT NULL ,
-  `fk_hogar`  INT NOT NULL,
+  `fk_tiposVivienda`  INT NOT NULL,
   `fk_geografia`  INT NOT NULL,
   `fk_nivel_confort`  INT NOT NULL,
   `fk_tiempo`  INT NOT NULL,
@@ -85,8 +85,8 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `cantDesocupados` INT NULL ,
   PRIMARY KEY (`idInfoHogar`) ,
   UNIQUE INDEX `idInfoHogares_UNIQUE` (`idInfoHogar` ASC) ,
-    FOREIGN KEY (`fk_hogar`)
-  REFERENCES `ECH_DW`.`hogares` (`idHogar`)
+    FOREIGN KEY (`fk_tiposVivienda`)
+  REFERENCES `ECH_DW`.`tiposVivienda` (`idTiposVivienda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (`fk_geografia`)

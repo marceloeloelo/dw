@@ -1,4 +1,5 @@
+drop table infoHogares;
 drop table geografia;
-drop table hogares;
+drop table tiposVivienda;
 drop table nivelesConfort;
 drop table tiempo;
