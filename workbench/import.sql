@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `ECH_DW`.`tiposVivienda` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`tiposVivienda` (
   `idTiposVivienda` INT NOT NULL ,
-  `tipo` INT NULL ,
+  `tipo` VARCHAR(45) NULL ,
   PRIMARY KEY (`idTiposVivienda`) ,
   UNIQUE INDEX `idTiposVivienda_UNIQUE` (`idTiposVivienda` ASC) )
 ENGINE = InnoDB;
