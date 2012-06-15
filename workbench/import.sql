@@ -25,10 +25,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ECH_DW`.`nivelesConfort` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`nivelesConfort` (
-  `idnivelConfort` INT NOT NULL ,
+  `idNivelesConfort` INT NOT NULL ,
   `tipo` INT NULL ,
-  PRIMARY KEY (`idnivelConfort`) ,
-  UNIQUE INDEX `idnivelesConfort_UNIQUE` (`idnivelConfort` ASC) )
+  PRIMARY KEY (`idNivelesConfort`) ,
+  UNIQUE INDEX `idnivelesConfort_UNIQUE` (`idNivelesConfort` ASC) )
 ENGINE = InnoDB;
 
 
@@ -70,7 +70,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ECH_DW`.`infoHogares` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
-  `idInfoHogar` INT NOT NULL ,
+  `idInfoHogares` INT NOT NULL ,
   `fk_tiposVivienda`  INT NOT NULL,
   `fk_geografia`  INT NOT NULL,
   `fk_nivel_confort`  INT NOT NULL,
@@ -83,8 +83,8 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `cantMujeres` INT NULL ,
   `cantOcupados` INT NULL ,
   `cantDesocupados` INT NULL ,
-  PRIMARY KEY (`idInfoHogar`) ,
-  UNIQUE INDEX `idInfoHogares_UNIQUE` (`idInfoHogar` ASC) ,
+  PRIMARY KEY (`idInfoHogares`) ,
+  UNIQUE INDEX `idInfoHogares_UNIQUE` (`idInfoHogares` ASC) ,
     FOREIGN KEY (`fk_tiposVivienda`)
   REFERENCES `ECH_DW`.`tiposVivienda` (`idTiposVivienda`)
     ON DELETE NO ACTION
@@ -94,7 +94,7 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   FOREIGN KEY (`fk_nivel_confort`)
-    REFERENCES `ECH_DW`.`nivelesConfort` (`idNivelConfort`)
+    REFERENCES `ECH_DW`.`nivelesConfort` (`idNivelesConfort`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   FOREIGN KEY (`fk_tiempo`)
