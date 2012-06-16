@@ -39,11 +39,14 @@ DROP TABLE IF EXISTS `ECH_DW`.`geografia` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`geografia` (
   `idGeografia` INT NOT NULL ,
-  `departamento` VARCHAR(45) NULL ,
-  `localidad` VARCHAR(45) NULL ,
-  `region` VARCHAR(45) NULL ,
-  `ccz` VARCHAR(45) NULL ,
-  `barrio` VARCHAR(45) NULL ,
+  `idHogar` INT NULL ,
+  `idLocalidad` INT NULL,
+  `idRegion` INT NULL ,
+  `idCCZ` INT NULL ,
+  `idBarrio` INT NULL ,
+  `nombreBarrio` VARCHAR(45) NULL ,
+  `idDepartamento` INT NULL ,
+  `nombreDepartamento` VARCHAR(45) NULL ,
   PRIMARY KEY (`idGeografia`) ,
   UNIQUE INDEX `idGeografia_UNIQUE` (`idGeografia` ASC) )
 ENGINE = InnoDB;
@@ -73,7 +76,7 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `idInfoHogares` INT NOT NULL ,
   `fk_tiposVivienda`  INT NOT NULL,
   `fk_geografia`  INT NOT NULL,
-  `fk_nivel_confort`  INT NOT NULL,
+  `fk_niveles_confort`  INT NOT NULL,
   `fk_tiempo`  INT NOT NULL,
   `cantHogares` INT NULL ,
   `cantPersonas` INT NULL ,
@@ -93,7 +96,7 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   REFERENCES `ECH_DW`.`geografia` (`idGeografia`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  FOREIGN KEY (`fk_nivel_confort`)
+  FOREIGN KEY (`fk_niveles_confort`)
     REFERENCES `ECH_DW`.`nivelesConfort` (`idNivelesConfort`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
