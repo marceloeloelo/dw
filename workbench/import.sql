@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `ECH_DW`.`infoHogares` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `idInfoHogares` INT NOT NULL ,
-  `fk_tiposVivienda`  INT NOT NULL,
+  `fk_tipos_vivienda`  INT NOT NULL,
   `fk_geografia`  INT NOT NULL,
   `fk_niveles_confort`  INT NOT NULL,
   `fk_tiempo`  INT NOT NULL,
@@ -88,7 +88,7 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `cantDesocupados` INT NULL ,
   PRIMARY KEY (`idInfoHogares`) ,
   UNIQUE INDEX `idInfoHogares_UNIQUE` (`idInfoHogares` ASC) ,
-    FOREIGN KEY (`fk_tiposVivienda`)
+    FOREIGN KEY (`fk_tipos_vivienda`)
   REFERENCES `ECH_DW`.`tiposVivienda` (`idTiposVivienda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
