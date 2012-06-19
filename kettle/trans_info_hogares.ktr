@@ -181,8 +181,16 @@ if (C1 == 1){
 }
 
 &#47;&#47;idInfoHogar
-var idInfoHogares = parseInt(fk_geografia + fk_niveles_confort + fk_tipos_vivienda + fk_tiempo);
-</jsScript_script>
+var idInfoHogares = parseInt(&quot;&quot; + fk_geografia + fk_niveles_confort + fk_tipos_vivienda + fk_tiempo);
+
+var cantHogares = 1; &#47;&#47;??
+var cantHombres = HT1;
+var cantMujeres = HT2;
+var cantPersonas = cantHombres + cantMujeres;
+var cantPersonasMenor14 = HT3;
+var cantPersonasMayor14 = cantPersonas - cantPersonasMenor14;
+var cantOcupados = HT5;
+var cantDesocupados = HT6;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>tieneElectro</name>
         <rename>tieneElectro</rename>
         <type>String</type>
@@ -255,6 +263,54 @@ var idInfoHogares = parseInt(fk_geografia + fk_niveles_confort + fk_tipos_vivien
         <length>16</length>
         <precision>2</precision>
         <replace>N</replace>
+      </field>      <field>        <name>cantHogares</name>
+        <rename>cantHogares</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantHombres</name>
+        <rename>cantHombres</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantMujeres</name>
+        <rename>cantMujeres</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantPersonas</name>
+        <rename>cantPersonas</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantPersonasMenor14</name>
+        <rename>cantPersonasMenor14</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantPersonasMayor14</name>
+        <rename>cantPersonasMayor14</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantOcupados</name>
+        <rename>cantOcupados</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantDesocupados</name>
+        <rename>cantDesocupados</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>416</xloc>
@@ -264,10 +320,81 @@ var idInfoHogares = parseInt(fk_geografia + fk_niveles_confort + fk_tipos_vivien
     </step>
 
   <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>idInfoHogares</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>fk_niveles_confort</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>fk_tiempo</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>fk_geografia</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>fk_tipos_vivienda</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantHogares</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantHombres</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantMujeres</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantPersonas</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantPersonasMenor14</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantPersonasMayor14</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantOcupados</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cantDesocupados</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>574</xloc>
+      <yloc>118</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>h2009</name>
     <type>CsvInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -1698,47 +1825,8 @@ var idInfoHogares = parseInt(fk_geografia + fk_niveles_confort + fk_tipos_vivien
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>248</xloc>
-      <yloc>117</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>idInfoHogares</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>fk_niveles_confort</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>fk_tiempo</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>fk_geografia</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>fk_tipos_vivienda</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>574</xloc>
-      <yloc>120</yloc>
+      <xloc>249</xloc>
+      <yloc>118</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1776,8 +1864,8 @@ var idInfoHogares = parseInt(fk_geografia + fk_niveles_confort + fk_tipos_vivien
       </file>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>712</xloc>
-      <yloc>121</yloc>
+      <xloc>711</xloc>
+      <yloc>119</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
