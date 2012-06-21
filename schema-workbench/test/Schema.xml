@@ -1,0 +1,16 @@
+<Schema name="ECH_DW">
+  <Cube name="InfoHogaresCube" visible="true" cache="true" enabled="true">
+    <Table name="infoHogares" schema="ECH_DW">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="fk_tipos_vivienda" highCardinality="false" name="TiposVivienda">
+      <Hierarchy name="Tipo" visible="true" hasAll="true" primaryKey="idTiposVivienda" primaryKeyTable="tiposVivienda">
+        <Table name="tiposVivienda" schema="ECH_DW">
+        </Table>
+        <Level name="tipo" visible="true" table="tiposVivienda" column="tipo" nameColumn="tipo" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="cantPersonas" column="cantPersonas" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

@@ -1,1 +1,0 @@
-INSERT INTO nivelesConfort(idNivelesConfort, tipo) VALUES (1,1);INSERT INTO nivelesConfort(idNivelesConfort, tipo) VALUES (2,2);INSERT INTO nivelesConfort(idNivelesConfort, tipo) VALUES (3,3);INSERT INTO nivelesConfort(idNivelesConfort, tipo) VALUES (4,4);

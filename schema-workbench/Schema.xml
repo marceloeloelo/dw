@@ -1,0 +1,20 @@
+<Schema name="ECH_DW">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="tiposVivienda">
+    <Hierarchy name="tipos" visible="true" hasAll="true">
+      <Table name="tiposVivienda">
+      </Table>
+      <Level name="tipo" visible="true" table="tiposVivienda" column="tipo" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="infoHogares" visible="true" cache="true" enabled="true">
+    <Table name="infoHogares">
+    </Table>
+    <DimensionUsage source="tiposVivienda" name="tiposVivienda" visible="true" foreignKey="fk_tipos_vivienda" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="cantPersonas" column="cantPersonas" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="cantHogares" column="cantHogares" aggregator="distinct-count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

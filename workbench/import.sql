@@ -73,7 +73,6 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ECH_DW`.`infoHogares` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
-  `idInfoHogares` INT NOT NULL ,
   `fk_tipos_vivienda`  INT NOT NULL,
   `fk_geografia`  INT NOT NULL,
   `fk_niveles_confort`  INT NOT NULL,
@@ -86,8 +85,7 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
   `cantMujeres` INT NULL ,
   `cantOcupados` INT NULL ,
   `cantDesocupados` INT NULL ,
-  PRIMARY KEY (`idInfoHogares`) ,
-  UNIQUE INDEX `idInfoHogares_UNIQUE` (`idInfoHogares` ASC) ,
+  PRIMARY KEY (`fk_niveles_confort`,`fk_tiempo`,`fk_tipos_vivienda`,`fk_geografia`) ,
     FOREIGN KEY (`fk_tipos_vivienda`)
   REFERENCES `ECH_DW`.`tiposVivienda` (`idTiposVivienda`)
     ON DELETE NO ACTION

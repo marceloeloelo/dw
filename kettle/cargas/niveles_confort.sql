@@ -1,0 +1,1 @@
+INSERT INTO ECH_DW.nivelesConfort(idNivelesConfort, tipo) VALUES (1,1);INSERT INTO ECH_DW.nivelesConfort(idNivelesConfort, tipo) VALUES (2,2);INSERT INTO ECH_DW.nivelesConfort(idNivelesConfort, tipo) VALUES (3,3);INSERT INTO ECH_DW.nivelesConfort(idNivelesConfort, tipo) VALUES (4,4);
