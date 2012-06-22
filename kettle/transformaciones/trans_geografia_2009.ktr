@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>trans_geografia</name>
+    <name>trans_geografia_2009</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
@@ -114,7 +115,7 @@
     <addtoresult>N</addtoresult>
     <startnewline>Y</startnewline>
     <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;geografia</name>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;geografia_2009</name>
       <extention>sql</extention>
       <append>N</append>
       <split>N</split>
