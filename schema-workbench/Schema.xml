@@ -11,9 +11,9 @@
     <Hierarchy name="tiempo" visible="true" hasAll="true">
       <Table name="tiempo">
       </Table>
-      <Level name="mes" visible="true" table="tiempo" column="mes" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="mes" visible="true" table="tiempo" column="mes" parentColumn="trimestre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="trimestre" visible="true" table="tiempo" column="trimestre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="trimestre" visible="true" table="tiempo" column="trimestre" parentColumn="anio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
       <Level name="anio" visible="true" table="tiempo" column="anio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
