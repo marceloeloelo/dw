@@ -141,7 +141,8 @@
 function buildId2011(numero){
   var anio = numero.slice(0,4);
   if (anio == &quot;2011&quot;){
-    return parseInt(numero.substr(4, numero.length), 10) &#47;&#47; numero sin el 2011 del principio ni los ceros concatenados
+    var tail = parseInt(numero.substr(4, numero.length), 10) &#47;&#47; numero sin el 2011 del principio ni los ceros concatenados
+    return parseInt(&quot;2011&quot; + tail, 10);
   } else{
     return parseInt(numero, 10);
   }
