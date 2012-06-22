@@ -138,6 +138,15 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
+function buildId2011(numero){
+  var anio = numero.slice(0,4);
+  if (anio == &quot;2011&quot;){
+    return parseInt(numero.substr(4, numero.length), 10) &#47;&#47; numero sin el 2011 del principio ni los ceros concatenados
+  } else{
+    return parseInt(numero, 10);
+  }
+}
+
 &#47;&#47;Calculo nivelConfort
 function tieneElectro(codigo){
   return (codigo == 1);
@@ -184,10 +193,10 @@ if (cantElectro &gt; 15){
 }
 
 &#47;&#47;idTiempo
-var fk_tiempo = parseInt(MES) + 24;
+var fk_tiempo = parseInt(MES, 10) + 24;
 
 &#47;&#47;ifGeografia
-var fk_geografia = parseInt(NUMERO); &#47;&#47;Ya viene con el 2011
+var fk_geografia = buildId2011(NUMERO); &#47;&#47;Ya viene con el 2011
 
 &#47;&#47;idTipoVivienda
 var fk_tipos_vivienda = null;
@@ -324,6 +333,45 @@ var cantDesocupados = HT6;</jsScript_script>
     </step>
 
   <step>
+    <name>SQL File Output</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema/>
+    <table>infoHogares</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;info_hogares_2011</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>610</xloc>
+      <yloc>108</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
@@ -386,45 +434,6 @@ var cantDesocupados = HT6;</jsScript_script>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>458</xloc>
       <yloc>107</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SQL File Output</name>
-    <type>SQLFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ECH_DW</connection>
-    <schema/>
-    <table>infoHogares</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;info_hogares_2011</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>610</xloc>
-      <yloc>108</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

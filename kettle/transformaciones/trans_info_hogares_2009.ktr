@@ -165,10 +165,10 @@ if (cantElectro &gt; 15){
 }
 
 &#47;&#47;idTiempo
-var fk_tiempo = parseInt(MES);
+var fk_tiempo = parseInt(MES, 10);
 
 &#47;&#47;ifGeografia
-var fk_geografia = parseInt(&quot;2009&quot; + NUMERO);
+var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));
 
 &#47;&#47;idTipoVivienda
 var fk_tipos_vivienda = null;

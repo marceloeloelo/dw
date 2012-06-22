@@ -95,34 +95,6 @@
   <order>
   <hop> <from>XBase input</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>  <hop> <from>Modified Java Script Value</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>SQL File Output</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>XBase input</name>
-    <type>XBaseInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <file_dbf>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;2010&#47;DBF_H2010_Terceros.dbf</file_dbf>
-    <limit>0</limit>
-    <add_rownr>N</add_rownr>
-    <field_rownr/>
-    <include>N</include>
-    <include_field/>
-    <charset_name/>
-    <accept_filenames>N</accept_filenames>
-    <accept_field/>
-    <accept_stepname/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>148</xloc>
-      <yloc>109</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Modified Java Script Value</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -138,28 +110,28 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var idGeografia = parseInt(&apos;2010&apos; + NUMERO);
-var idHogar = parseInt(NUMERO);
+var idGeografia = parseInt(&apos;2010&apos; + parseInt(NUMERO, 10));
+var idHogar = parseInt(NUMERO, 10);
 
 var idBarrio;
 var nombreBarrio;
-if (parseInt(BARRIO) == 0){
+if (parseInt(BARRIO, 10) == 0){
   idBarrio = nombreBarrio = null;
 } else{
-  idBarrio = parseInt(BARRIO);
+  idBarrio = parseInt(BARRIO, 10);
   nombreBarrio = NOMBARRIO;
 }
 
 var idCCZ;
-if (parseInt(CCZ) == 0){
+if (parseInt(CCZ, 10) == 0){
   idCCZ = null;
 } else{
-  idCCZ = parseInt(CCZ);
+  idCCZ = parseInt(CCZ, 10);
 }
 
-var idLocalidad    = parseInt(LOCAGR);
-var idRegion       = parseInt(REGION);
-var idDepartamento = parseInt(DPTO);
+var idLocalidad    = parseInt(LOCAGR, 10);
+var idRegion       = parseInt(REGION, 10);
+var idDepartamento = parseInt(DPTO, 10);
 var nombreDepartamento = NOMDPTO;
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>idGeografia</name>
@@ -225,6 +197,45 @@ var nombreDepartamento = NOMDPTO;
     </step>
 
   <step>
+    <name>SQL File Output</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema/>
+    <table>geografia</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;geografia_2010</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>625</xloc>
+      <yloc>110</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
@@ -280,8 +291,8 @@ var nombreDepartamento = NOMDPTO;
     </step>
 
   <step>
-    <name>SQL File Output</name>
-    <type>SQLFileOutput</type>
+    <name>XBase input</name>
+    <type>XBaseInput</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -289,31 +300,20 @@ var nombreDepartamento = NOMDPTO;
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>ECH_DW</connection>
-    <schema/>
-    <table>geografia</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;geografia_2010</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
+    <file_dbf>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;2010&#47;DBF_H2010_Terceros.dbf</file_dbf>
+    <limit>0</limit>
+    <add_rownr>N</add_rownr>
+    <field_rownr/>
+    <include>N</include>
+    <include_field/>
+    <charset_name/>
+    <accept_filenames>N</accept_filenames>
+    <accept_field/>
+    <accept_stepname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>625</xloc>
-      <yloc>110</yloc>
+      <xloc>148</xloc>
+      <yloc>109</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

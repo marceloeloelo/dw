@@ -1646,28 +1646,28 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var idGeografia = parseInt(&apos;2009&apos; + NUMERO);
-var idHogar = parseInt(NUMERO);
+var idGeografia = parseInt(&apos;2009&apos; + parseInt(NUMERO, 10));
+var idHogar = parseInt(NUMERO, 10);
 
 var idBarrio;
 var nombreBarrio;
-if (parseInt(BARRIO) == 0){
+if (parseInt(BARRIO, 10) == 0){
   idBarrio = nombreBarrio = null;
 } else{
-  idBarrio = parseInt(BARRIO);
+  idBarrio = parseInt(BARRIO, 10);
   nombreBarrio = NOMBARRIO;
 }
 
 var idCCZ;
-if (parseInt(CCZ) == 0){
+if (parseInt(CCZ, 10) == 0){
   idCCZ = null;
 } else{
-  idCCZ = parseInt(CCZ);
+  idCCZ = parseInt(CCZ, 10);
 }
 
-var idLocalidad    = parseInt(LOC);
-var idRegion       = parseInt(REGION);
-var idDepartamento = parseInt(DPTO);
+var idLocalidad    = parseInt(LOC, 10);
+var idRegion       = parseInt(REGION, 10);
+var idDepartamento = parseInt(DPTO, 10);
 var nombreDepartamento = NOMDPTO;
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>idGeografia</name>
