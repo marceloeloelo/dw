@@ -3111,7 +3111,7 @@ for (var i=1; i&lt;arrAniosAprobados.length; i++) {
     cantAniosAprobados = cantAniosAprobados + parseInt(arrAniosAprobados[i], 10);
 }
 
-&#47;&#47; nivelEducacionAlcanzado
+&#47;&#47; fk_educacion_alcanzada
 var nivelEducacionAlcanzado;
 for (var i = 0; i&lt;arrAniosAprobados.length; i++){
   if (parseInt(arrAniosAprobados[i], 10) != 0){
@@ -3119,8 +3119,9 @@ for (var i = 0; i&lt;arrAniosAprobados.length; i++){
   }
 }
 nivelEducacionAlcanzado++; &#47;&#47; En la tabla no hay id 0
+var fk_educacion_alcanzada = nivelEducacionAlcanzado;
 
-&#47;&#47; nivelEducacionFinalizado
+&#47;&#47; fk_educacion_finalizada
 var nivelEducacionFinalizado = 0;
 if (parseInt(E53, 10) == 1) {
   nivelEducacionFinalizado = nivelEducacionAlcanzado;
@@ -3134,10 +3135,21 @@ if (parseInt(E53, 10) == 1) {
   }
   nivelEducacionFinalizado++;
 }
+var fk_educacion_finalizada = nivelEducacionFinalizado;
 
 &#47;&#47; cantIngresos
-var cantIngresos = 0;
-var arrIngresos  = [];</jsScript_script>
+&#47;&#47;var arrIngresos = [G126_1, G126_2, G126_3, G126_4, G126_5, G126_6, G126_7, G126_8, G127_3,
+&#47;&#47;G128_1, G129_2, G130_1, G131_1, G133_1, G133_2, G134_1, G134_2, G134_3, G134_4, G134_5, G134_6, G134_7, G134_8, G135_3,
+&#47;&#47;G136_1, G137_2, G138_1, G139_1, G141_1, G141_2, G142, G143, G144_1, G144_2_1, G144_2_2, G144_2_3, G144_2_4, G144_2_5,
+&#47;&#47;G145, G146, G147,
+&#47;&#47;G148_1_1, G148_1_2, G148_1_3, G148_1_4, G148_1_5, G148_1_6, G148_1_7, G148_1_8, G148_1_9, G148_1_10, G148_1_11,
+&#47;&#47;G148_2_1, G148_2_2, G148_2_3, G148_2_4, G148_2_5, G148_2_6, G148_2_7, G148_2_8, G148_2_9, G148_2_10, G148_2_11,
+&#47;&#47;G148_3, G148_4, G148_5_1, G148_5_2, G153_1, G153_2, G154_1];
+
+&#47;&#47;var cantIngresos = 0;
+&#47;&#47;for (var i=0; i&lt;arrIngresos.length; i++) {
+ &#47;&#47;cantIngresos += parseInt(arrIngresos[i], 10);
+&#47;&#47;};</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>cantPersonas</name>
         <rename>cantPersonas</rename>
         <type>Number</type>
@@ -3168,6 +3180,12 @@ var arrIngresos  = [];</jsScript_script>
         <length>16</length>
         <precision>2</precision>
         <replace>N</replace>
+      </field>      <field>        <name>fk_educacion_alcanzada</name>
+        <rename>fk_educacion_alcanzada</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
       </field>      <field>        <name>nivelEducacionFinalizado</name>
         <rename>nivelEducacionFinalizado</rename>
         <type>Number</type>
@@ -3180,17 +3198,11 @@ var arrIngresos  = [];</jsScript_script>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>cantIngresos</name>
-        <rename>cantIngresos</rename>
+      </field>      <field>        <name>fk_educacion_finalizada</name>
+        <rename>fk_educacion_finalizada</rename>
         <type>Number</type>
         <length>16</length>
         <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>arrIngresos</name>
-        <rename>arrIngresos</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -3218,15 +3230,11 @@ var arrIngresos  = [];</jsScript_script>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>nivelEducacionAlcanzado</name>
+      </field>      <field>        <name>fk_educacion_alcanzada</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>nivelEducacionFinalizado</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cantIngresos</name>
+      </field>      <field>        <name>fk_educacion_finalizada</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
