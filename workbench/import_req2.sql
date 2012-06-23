@@ -70,7 +70,8 @@ DROP TABLE IF EXISTS `ECH_DW`.`infoPersonas` ;
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoPersonas` (
   `fk_sexos`           INT NOT NULL ,
   `fk_geografia`       INT NOT NULL ,
-  `fk_educacion`       INT NOT NULL ,
+  `fk_educacion_alcanzada`       INT NOT NULL ,
+  `fk_educacion_finalizada`       INT NOT NULL ,
   `fk_tiempo`          INT NOT NULL ,
   `fk_edades`          INT NOT NULL ,
   `fk_salud`           INT NOT NULL ,
@@ -80,12 +81,13 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoPersonas` (
   `cantIngresos`       INT NULL ,
   INDEX `fk_sexos` (`fk_sexos` ASC) ,
   INDEX `fk_geografia` (`fk_geografia` ASC) ,
-  INDEX `fk_educacion` (`fk_educacion` ASC) ,
+  INDEX `fk_educacion_alcanzada` (`fk_educacion_alcanzada` ASC) ,
+  INDEX `fk_educacion_finalizada` (`fk_educacion_finalizada` ASC) ,
   INDEX `fk_tiempo` (`fk_tiempo` ASC) ,
   INDEX `fk_edades` (`fk_edades` ASC) ,
   INDEX `fk_salud` (`fk_salud` ASC) ,
   INDEX `fk_ocupaciones` (`fk_ocupaciones` ASC) ,
-  PRIMARY KEY (`fk_sexos`,`fk_geografia`,`fk_educacion`,`fk_tiempo`, `fk_edades`, `fk_salud`, `fk_ocupaciones`) ,
+  PRIMARY KEY (`fk_sexos`,`fk_geografia`,`fk_educacion_alcanzada`, `fk_educacion_finalizada`,`fk_tiempo`, `fk_edades`, `fk_salud`, `fk_ocupaciones`) ,
   CONSTRAINT `fk_sexos`
     FOREIGN KEY (`fk_sexos` )
     REFERENCES `ECH_DW`.`sexos` (`idSexos` )
@@ -96,8 +98,13 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoPersonas` (
     REFERENCES `ECH_DW`.`geografia` (`idGeografia` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_educacion`
-    FOREIGN KEY (`fk_educacion` )
+  CONSTRAINT `fk_educacion_alcanzada`
+    FOREIGN KEY (`fk_educacion_alcanzada` )
+    REFERENCES `ECH_DW`.`educacion` (`idEducacion` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_educacion_finalizada`
+    FOREIGN KEY (`fk_educacion_finalizada` )
     REFERENCES `ECH_DW`.`educacion` (`idEducacion` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
