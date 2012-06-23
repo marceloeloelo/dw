@@ -6,6 +6,10 @@ DROP SCHEMA IF EXISTS `ECH_DW` ;
 CREATE SCHEMA IF NOT EXISTS `ECH_DW` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `ECH_DW` ;
 
+-- ---------------------------------------------------------------------------
+-- 														REQUERIMIENTO 1
+-- ---------------------------------------------------------------------------
+
 -- -----------------------------------------------------
 -- Table `ECH_DW`.`tiposVivienda`
 -- -----------------------------------------------------
@@ -73,18 +77,18 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ECH_DW`.`infoHogares` ;
 
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
-  `fk_tipos_vivienda`  INT NOT NULL,
-  `fk_geografia`  INT NOT NULL,
+  `fk_tipos_vivienda`   INT NOT NULL,
+  `fk_geografia`        INT NOT NULL,
   `fk_niveles_confort`  INT NOT NULL,
-  `fk_tiempo`  INT NOT NULL,
-  `cantHogares` INT NULL ,
-  `cantPersonas` INT NULL ,
+  `fk_tiempo`           INT NOT NULL,
+  `cantHogares`         INT NULL ,
+  `cantPersonas`        INT NULL ,
   `cantPersonasMayor14` INT NULL ,
   `cantPersonasMenor14` INT NULL ,
-  `cantHombres` INT NULL ,
-  `cantMujeres` INT NULL ,
-  `cantOcupados` INT NULL ,
-  `cantDesocupados` INT NULL ,
+  `cantHombres`         INT NULL ,
+  `cantMujeres`         INT NULL ,
+  `cantOcupados`        INT NULL ,
+  `cantDesocupados`     INT NULL ,
   PRIMARY KEY (`fk_niveles_confort`,`fk_tiempo`,`fk_tipos_vivienda`,`fk_geografia`) ,
     FOREIGN KEY (`fk_tipos_vivienda`)
   REFERENCES `ECH_DW`.`tiposVivienda` (`idTiposVivienda`)
@@ -104,6 +108,134 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoHogares` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- ---------------------------------------------------------------------------
+-- 														REQUERIMIENTO 2
+-- ---------------------------------------------------------------------------
+
+-- -----------------------------------------------------
+-- Table `ECH_DW_TEST`.`ocupaciones`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ECH_DW_TEST`.`ocupaciones` ;
+
+CREATE  TABLE IF NOT EXISTS `ECH_DW_TEST`.`ocupaciones` (
+  `idOcupaciones` INT NOT NULL ,
+  `Ocupacion` VARCHAR(100) NULL ,
+  PRIMARY KEY (`idOcupaciones`) ,
+  UNIQUE INDEX `idOcupaciones_UNIQUE` (`idOcupaciones` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ECH_DW_TEST`.`edades`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ECH_DW_TEST`.`edades` ;
+
+CREATE  TABLE IF NOT EXISTS `ECH_DW_TEST`.`edades` (
+  `idEdades` INT NOT NULL ,
+  `Edad` VARCHAR(40) NULL ,
+  PRIMARY KEY (`idEdades`) ,
+  UNIQUE INDEX `idEdades_UNIQUE` (`idEdades` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ECH_DW_TEST`.`salud`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ECH_DW_TEST`.`salud` ;
+
+CREATE  TABLE IF NOT EXISTS `ECH_DW_TEST`.`salud` (
+  `idSalud` INT NOT NULL ,
+  `salud` VARCHAR(100) NULL ,
+  PRIMARY KEY (`idSalud`) ,
+  UNIQUE INDEX `idsalud_UNIQUE` (`idSalud` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ECH_DW_TEST`.`sexos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ECH_DW_TEST`.`sexos` ;
+
+CREATE  TABLE IF NOT EXISTS `ECH_DW_TEST`.`sexos` (
+  `idSexos` INT NOT NULL ,
+  `sexo` VARCHAR(45) NULL ,
+  PRIMARY KEY (`idSexos`) ,
+  UNIQUE INDEX `idsexos_UNIQUE` (`idSexos` ASC) )
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `ECH_DW_TEST`.`educacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ECH_DW_TEST`.`educacion` ;
+
+CREATE  TABLE IF NOT EXISTS `ECH_DW_TEST`.`educacion` (
+  `idEducacion` INT NOT NULL ,
+  `tipo` VARCHAR(100) NULL ,
+  PRIMARY KEY (`idEducacion`) ,
+  UNIQUE INDEX `idEducacion_UNIQUE` (`idEducacion` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ECH_DW_TEST`.`infoPersonas`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ECH_DW_TEST`.`infoPersonas` ;
+
+CREATE  TABLE IF NOT EXISTS `ECH_DW_TEST`.`infoPersonas` (
+  `fk_sexos`           INT NOT NULL ,
+  `fk_geografia`       INT NOT NULL ,
+  `fk_educacion`       INT NOT NULL ,
+  `fk_tiempo`          INT NOT NULL ,
+  `fk_edades`          INT NOT NULL ,
+  `fk_salud`           INT NOT NULL ,
+  `fk_ocupaciones`     INT NOT NULL ,
+  `cantPersonas`       INT NULL ,
+  `cantAniosAprobados` INT NULL ,
+  `cantIngresos`       INT NULL ,
+  INDEX `fk_sexos` (`fk_sexos` ASC) ,
+  INDEX `fk_geografia` (`fk_geografia` ASC) ,
+  INDEX `fk_educacion` (`fk_educacion` ASC) ,
+  INDEX `fk_tiempo` (`fk_tiempo` ASC) ,
+  INDEX `fk_edades` (`fk_edades` ASC) ,
+  INDEX `fk_salud` (`fk_salud` ASC) ,
+  INDEX `fk_ocupaciones` (`fk_ocupaciones` ASC) ,
+  PRIMARY KEY (`fk_sexos`,`fk_geografia`,`fk_educacion`,`fk_tiempo`, `fk_edades`, `fk_salud`, `fk_ocupaciones`) ,
+  CONSTRAINT `fk_sexos`
+    FOREIGN KEY (`fk_sexos` )
+    REFERENCES `ECH_DW_TEST`.`sexos` (`idSexos` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_geografia`
+    FOREIGN KEY (`fk_geografia` )
+    REFERENCES `ECH_DW_TEST`.`geografia` (`idGeografia` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_educacion`
+    FOREIGN KEY (`fk_educacion` )
+    REFERENCES `ECH_DW_TEST`.`educacion` (`idEducacion` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tiempo`
+    FOREIGN KEY (`fk_tiempo` )
+    REFERENCES `ECH_DW_TEST`.`tiempo` (`idTiempo` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_edades`
+    FOREIGN KEY (`fk_edades` )
+    REFERENCES `ECH_DW_TEST`.`edades` (`idEdades` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_salud`
+    FOREIGN KEY (`fk_salud` )
+    REFERENCES `ECH_DW_TEST`.`salud` (`idSalud` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ocupaciones`
+    FOREIGN KEY (`fk_ocupaciones` )
+    REFERENCES `ECH_DW_TEST`.`ocupaciones` (`idOcupaciones` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
