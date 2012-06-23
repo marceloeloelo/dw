@@ -56,14 +56,14 @@
     <Hierarchy name="geografia" visible="true" hasAll="true" primaryKey="idGeografia">
       <Table name="geografia">
       </Table>
-      <Level name="region" visible="true" table="geografia" column="idRegion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
       <Level name="departamento" visible="true" table="geografia" column="idDepartamento" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <KeyExpression>
           <SQL dialect="generic">
             <![CDATA[geografia.nombreDepartamento]]>
           </SQL>
         </KeyExpression>
+      </Level>
+      <Level name="region" visible="true" table="geografia" column="idRegion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
       <Level name="localidad" visible="true" table="geografia" column="idLocalidad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
