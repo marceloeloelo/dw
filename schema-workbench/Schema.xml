@@ -1,26 +1,26 @@
 <Schema name="ECH_DW_Workbench">
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="tiposVivienda">
-    <Hierarchy name="tiposVivienda" visible="true" hasAll="true">
+    <Hierarchy name="tiposVivienda" visible="true" hasAll="true" primaryKey="idTiposVivienda">
       <Table name="tiposVivienda">
       </Table>
       <Level name="tipo" visible="true" table="tiposVivienda" column="tipo" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="tiempo">
-    <Hierarchy name="tiempo" visible="true" hasAll="true">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="tiempo">
+    <Hierarchy name="tiempo" visible="true" hasAll="true" primaryKey="idTiempo">
       <Table name="tiempo">
       </Table>
-      <Level name="mes" visible="true" table="tiempo" column="mes" parentColumn="trimestre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="anio" visible="true" table="tiempo" column="anio" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
-      <Level name="trimestre" visible="true" table="tiempo" column="trimestre" parentColumn="anio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="trimestre" visible="true" table="tiempo" column="trimestre" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
       </Level>
-      <Level name="anio" visible="true" table="tiempo" column="anio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="mes" visible="true" table="tiempo" column="mes" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="nivelesConfort">
-    <Hierarchy name="nivelesConfort" visible="true" hasAll="true">
+    <Hierarchy name="nivelesConfort" visible="true" hasAll="true" primaryKey="idNivelesConfort">
       <Table name="nivelesConfort">
       </Table>
       <Level name="tipo" visible="true" table="nivelesConfort" column="tipo" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
@@ -28,20 +28,20 @@
     </Hierarchy>
   </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="geografia">
-    <Hierarchy name="geografia" visible="true" hasAll="true">
+    <Hierarchy name="geografia" visible="true" hasAll="true" primaryKey="idGeografia">
       <Table name="geografia">
       </Table>
-      <Level name="hogar" visible="true" table="geografia" column="idHogar" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
-      <Level name="barrio" visible="true" table="geografia" column="idBarrio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
-      <Level name="ccz" visible="true" table="geografia" column="idCCZ" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="region" visible="true" table="geografia" column="idRegion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
       <Level name="departamento" visible="true" table="geografia" column="idDepartamento" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
       <Level name="localidad" visible="true" table="geografia" column="idLocalidad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="region" visible="true" table="geografia" column="idRegion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="ccz" visible="true" table="geografia" column="idCCZ" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="barrio" visible="true" table="geografia" column="idBarrio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="hogar" visible="true" table="geografia" column="idRegion" nameColumn="idHogar" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -58,19 +58,19 @@
     </DimensionUsage>
     <Measure name="cantPersonas" column="cantPersonas" datatype="Numeric" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantHogares" column="cantHogares" aggregator="distinct-count" visible="true">
+    <Measure name="cantHogares" column="cantHogares" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantPersonasMenor14" column="cantPersonasMenor14" aggregator="distinct-count" visible="true">
+    <Measure name="cantPersonasMenor14" column="cantPersonasMenor14" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantPersonasMayor14" column="cantPersonasMayor14" aggregator="distinct-count" visible="true">
+    <Measure name="cantPersonasMayor14" column="cantPersonasMayor14" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantHombres" column="cantHombres" aggregator="distinct-count" visible="true">
+    <Measure name="cantHombres" column="cantHombres" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantMujeres" column="cantMujeres" aggregator="distinct-count" visible="true">
+    <Measure name="cantMujeres" column="cantMujeres" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantOcupados" column="cantOcupados" aggregator="distinct-count" visible="true">
+    <Measure name="cantOcupados" column="cantOcupados" aggregator="sum" visible="true">
     </Measure>
-    <Measure name="cantDesocupados" column="cantDesocupados" aggregator="distinct-count" visible="true">
+    <Measure name="cantDesocupados" column="cantDesocupados" aggregator="sum" visible="true">
     </Measure>
   </Cube>
 </Schema>
