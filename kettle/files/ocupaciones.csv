@@ -1,0 +1,10 @@
+idOcupacion; ocupacion;
+1;desocupado
+2;inactivo
+3;asalariado privado
+4;asalariado publico
+5;miembro de cooperativa de produccion
+6;patron
+7;cuenta propia sin local o inversion
+8;cuenta propia con local o inversion
+9;programa publico (social) de empleo
