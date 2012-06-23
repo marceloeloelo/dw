@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `ECH_DW`.`infoPersonas` ; -- solves foreign key constraintsissues
 -- -----------------------------------------------------
 -- Table `ECH_DW`.`ocupaciones`
 -- -----------------------------------------------------
