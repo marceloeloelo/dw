@@ -26,14 +26,14 @@
       <Level name="trimestre" visible="true" table="tiempo" column="trimestre" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
         <KeyExpression>
           <SQL dialect="generic">
-            <![CDATA[anio.trimestre]]>
+            <![CDATA[tiempo.trimestre]]>
           </SQL>
         </KeyExpression>
       </Level>
       <Level name="mes" visible="true" table="tiempo" column="mes" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
         <KeyExpression>
           <SQL dialect="generic">
-            <![CDATA[]]>
+            <![CDATA[tiempo.mes]]>
           </SQL>
         </KeyExpression>
       </Level>
@@ -53,7 +53,7 @@
     </Hierarchy>
   </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="geografia">
-    <Hierarchy name="geografia" visible="true" hasAll="true" primaryKey="idGeografia">
+    <Hierarchy name="geografia_dptos" visible="true" hasAll="true" primaryKey="idGeografia">
       <Table name="geografia">
       </Table>
       <Level name="departamento" visible="true" table="geografia" column="idDepartamento" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
@@ -63,20 +63,40 @@
           </SQL>
         </KeyExpression>
       </Level>
-      <Level name="region" visible="true" table="geografia" column="idRegion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
       <Level name="localidad" visible="true" table="geografia" column="idLocalidad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="ccz" visible="true" table="geografia" column="idCCZ" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="hogar" visible="true" table="geografia" column="idHogar" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="barrio" visible="true" table="geografia" column="idBarrio" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+    </Hierarchy>
+    <Hierarchy name="geografia_barrios" visible="true" hasAll="true" primaryKey="idGeografia">
+      <Table name="geografia">
+      </Table>
+      <Level name="barrio" visible="true" table="geografia" column="idBarrio" uniqueMembers="false">
         <KeyExpression>
           <SQL dialect="generic">
             <![CDATA[geografia.nombreBarrio]]>
           </SQL>
         </KeyExpression>
       </Level>
-      <Level name="hogar" visible="true" table="geografia" column="idRegion" nameColumn="idHogar" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="hogar" visible="true" table="geografia" column="idHogar" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="geografia_regiones" visible="true" hasAll="true" primaryKey="idGeografia">
+      <Table name="geografia">
+      </Table>
+      <Level name="region" visible="true" table="geografia" column="idRegion" uniqueMembers="false">
+      </Level>
+      <Level name="localidad" visible="true" table="geografia" column="idLocalidad" uniqueMembers="false">
+      </Level>
+      <Level name="hogar" visible="true" table="geografia" column="idHogar" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="geografia_ccz" visible="true" hasAll="true">
+      <Table name="geografia" alias="">
+      </Table>
+      <Level name="ccz" visible="true" table="geografia" column="idCCZ" uniqueMembers="false">
+      </Level>
+      <Level name="hogar" visible="true" table="geografia" column="idHogar" uniqueMembers="false">
       </Level>
     </Hierarchy>
   </Dimension>
