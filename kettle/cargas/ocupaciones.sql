@@ -1,3 +1,4 @@
+INSERT INTO ocupaciones(idOcupacion, ocupacion) VALUES (1,'desocupado');
 INSERT INTO ocupaciones(idOcupacion, ocupacion) VALUES (2,'inactivo');
 INSERT INTO ocupaciones(idOcupacion, ocupacion) VALUES (3,'asalariado privado');
 INSERT INTO ocupaciones(idOcupacion, ocupacion) VALUES (4,'asalariado publico');
