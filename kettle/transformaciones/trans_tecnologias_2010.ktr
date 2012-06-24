@@ -251,7 +251,7 @@ var idPersona = parseInt(NPER, 10);
 
 &#47;&#47; fk_tics
 var fk_tics = 88888;
-if (parseInt(E62, 10) == 2){
+if (parseInt(E62, 10) != 1){
   fk_tics = 5;
 } else{
   fk_tics = parseInt(E65, 10);
