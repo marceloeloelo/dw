@@ -7,3 +7,4 @@ INSERT INTO ocupaciones(idOcupaciones, ocupacion) VALUES (6,'patron');
 INSERT INTO ocupaciones(idOcupaciones, ocupacion) VALUES (7,'cuenta propia sin local o inversion');
 INSERT INTO ocupaciones(idOcupaciones, ocupacion) VALUES (8,'cuenta propia con local o inversion');
 INSERT INTO ocupaciones(idOcupaciones, ocupacion) VALUES (9,'programa publico (social) de empleo');
+INSERT INTO ocupaciones(idOcupaciones, ocupacion) VALUES (10,'miembro del hogar no remunerado');

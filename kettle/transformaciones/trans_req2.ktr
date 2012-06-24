@@ -96,8 +96,8 @@
   <order>
   <hop> <from>ocupaciones</from><to>SQL File Output</to><enabled>Y</enabled> </hop>  <hop> <from>salud</from><to>SQL File Output 2</to><enabled>Y</enabled> </hop>  <hop> <from>sexos</from><to>SQL File Output 3</to><enabled>Y</enabled> </hop>  <hop> <from>edades</from><to>SQL File Output 4</to><enabled>Y</enabled> </hop>  <hop> <from>educacion</from><to>SQL File Output 5</to><enabled>Y</enabled> </hop>  <hop> <from>Modified Java Script Value</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>SQL File Output 6</to><enabled>Y</enabled> </hop>  <hop> <from>P2009_1</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>P2009_2</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Merge Join</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>ocupaciones</name>
-    <type>CsvInput</type>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -105,462 +105,332 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;ocupaciones.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>&quot;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>idOcupaciones</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>ocupacion</name>
+<join_type>INNER</join_type>
+<step1>P2009_1</step1>
+<step2>P2009_2</step2>
+    <keys_1>
+      <key>NUMERO</key>
+      <key>NPER</key>
+    </keys_1>
+    <keys_2>
+      <key>NUMERO</key>
+      <key>NPER</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>172</xloc>
+      <yloc>260</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Modified Java Script Value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+&#47;&#47; cantPersonas
+var cantPersonas = 1;
+
+&#47;&#47; cantAniosAprobados
+var cantAniosAprobados = 0;
+var arrAniosAprobados  = [1, E51_1, E51_2, E51_3, E51_4, E51_5, E51_6, E51_7, E51_8, E51_9, E51_10, E51_11];
+
+for (var i=1; i&lt;arrAniosAprobados.length; i++) {
+    cantAniosAprobados = cantAniosAprobados + parseInt(arrAniosAprobados[i], 10);
+}
+
+&#47;&#47; fk_educacion_alcanzada
+var nivelEducacionAlcanzado;
+for (var i = 0; i&lt;arrAniosAprobados.length; i++){
+  if (parseInt(arrAniosAprobados[i], 10) != 0){
+    nivelEducacionAlcanzado = i;
+  }
+}
+nivelEducacionAlcanzado++; &#47;&#47; En la tabla no hay id 0
+var fk_educacion_alcanzada = nivelEducacionAlcanzado;
+
+&#47;&#47; fk_educacion_finalizada
+var nivelEducacionFinalizado = 0;
+if (parseInt(E53, 10) == 1) {
+  nivelEducacionFinalizado = nivelEducacionAlcanzado;
+} else {
+  var counter = 1;
+  for (var i=11; i&gt;=0; i--) {
+   if (counter &gt;= 0 &amp;&amp; parseInt(arrAniosAprobados[i], 10) != 0) {
+     counter--;
+     nivelEducacionFinalizado = i;
+   }
+  }
+  nivelEducacionFinalizado++;
+}
+var fk_educacion_finalizada = nivelEducacionFinalizado;
+
+&#47;&#47; cantIngresos
+var arrIngresos = [G126_1, G126_2, G126_3, G126_4, G126_5, G126_6, G126_7, G126_8, G127_3,
+G128_1, G129_2, G130_1, G131_1, G133_1, G133_2, G134_1, G134_2, G134_3, G134_4, G134_5, G134_6, G134_7, G134_8, G135_3,
+G136_1, G137_2, G138_1, G139_1, G141_1, G141_2, G142, G143, G144_1, G144_2_1, G144_2_2, G144_2_3, G144_2_4, G144_2_5,
+G145, G146, G147,
+G148_1_1, G148_1_2, G148_1_3, G148_1_4, G148_1_5, G148_1_6, G148_1_7, G148_1_8, G148_1_9, G148_1_10, G148_1_11,
+G148_2_1, G148_2_2, G148_2_3, G148_2_4, G148_2_5, G148_2_6, G148_2_7, G148_2_8, G148_2_9, G148_2_10, G148_2_11,
+G148_3, G148_4, G148_5_1, G148_5_2, G153_1, G153_2, G154_1];
+
+var cantIngresos = 0;
+for (var i=0; i&lt;arrIngresos.length; i++) {
+  cantIngresos += parseInt(arrIngresos[i], 10);
+};
+
+&#47;&#47; fk_sexos
+var fk_sexos = parseInt(E26, 10);
+
+&#47;&#47; fk_edades
+var fk_edades;
+if (parseInt(E27, 10) &lt;= 14) {
+ fk_edades = 1;
+} else if (parseInt(E27, 10) &lt;= 18) {
+ fk_edades = 2;
+} else if (parseInt(E27, 10) &lt;= 22) {
+ fk_edades = 3;
+} else if (parseInt(E27, 10) &lt;= 30) {
+ fk_edades = 4;
+} else if (parseInt(E27, 10) &lt;= 40) {
+ fk_edades = 5;
+} else if (parseInt(E27, 10) &lt;= 50) {
+ fk_edades = 6;
+} else if (parseInt(E27, 10) &lt;= 60) {
+ fk_edades = 7;
+} else if (parseInt(E27, 10) &lt;= 70) {
+ fk_edades = 8;
+} else {
+ fk_edades = 9;
+}
+
+&#47;&#47; fk_salud
+var fk_salud;
+var tiene_msp = (parseInt(E45_1, 10) == 1);
+var tiene_iamc = (parseInt(E45_2, 10) == 1);
+var tiene_privado = (parseInt(E45_3, 10) == 1);
+var tiene_otro = (parseInt(E45_4, 10) == 1 || parseInt(E45_5, 10) == 1 || parseInt(E45_6, 10) == 1 || parseInt(E45_7, 10) == 1);
+if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_privado &amp;&amp; tiene_otro) {
+ fk_salud = 4;
+} else if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_privado) {
+ fk_salud = 3;
+} else if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_otro) {
+ fk_salud = 5;
+} else if (tiene_iamc &amp;&amp; tiene_privado &amp;&amp; tiene_otro) {
+ fk_salud = 11;
+} else if (tiene_msp &amp;&amp; tiene_privado &amp;&amp; tiene_otro) {
+ fk_salud = 7;
+} else if (tiene_msp &amp;&amp; tiene_iamc) {
+ fk_salud = 2;
+} else if (tiene_msp &amp;&amp; tiene_privado) {
+ fk_salud = 6;
+} else if (tiene_msp &amp;&amp; tiene_otro) {
+ fk_salud = 8;
+} else if (tiene_iamc &amp;&amp; tiene_privado) {
+ fk_salud = 10;
+} else if (tiene_iamc &amp;&amp; tiene_otro) {
+ fk_salud = 13;
+} else if (tiene_privado &amp;&amp; tiene_otro) {
+ fk_salud = 14;
+} else if (tiene_msp) {
+ fk_salud = 1;
+} else if (tiene_iamc) {
+ fk_salud = 9;
+} else if (tiene_privado) {
+ fk_salud = 13;
+} else if (tiene_otro) {
+ fk_salud = 15;
+}
+
+&#47;&#47; Pre: solo se llama si la persona no tiene trabajo
+function pobpcoac(){
+  if (parseInt(POBPCOAC, 10) == 1 || parseInt(POBPCOAC, 10) == 9 || parseInt(POBPCOAC, 10) == 10 ||
+      parseInt(POBPCOAC, 10) == 6 || parseInt(POBPCOAC, 10) == 7 || parseInt(POBPCOAC, 10) == 8  ||
+      parseInt(POBPCOAC, 10) == 11) {
+    return 2;
+  } else if (parseInt(POBPCOAC, 10) == 3 || parseInt(POBPCOAC, 10) == 4 || parseInt(POBPCOAC, 10) == 5) {
+    return 1;
+  }
+}
+
+&#47;&#47; fk_ocupaciones
+var fk_ocupaciones = 99999;
+if (parseInt(F70, 10) &lt;= 0){
+  fk_ocupaciones = pobpcoac();
+} else{
+  if (parseInt(F73, 10) == 0) {
+    fk_ocupaciones = pobpcoac();
+  } else if (parseInt(F73, 10) == 1) {
+    fk_ocupaciones = 3;
+  } else if (parseInt(F73, 10) == 2) {
+    fk_ocupaciones = 4;
+  } else if (parseInt(F73, 10) == 3) {
+    fk_ocupaciones = 5;
+  } else if (parseInt(F73, 10) == 4) {
+    fk_ocupaciones = 6;
+  } else if (parseInt(F73, 10) == 5) {
+    fk_ocupaciones = 7;
+  } else if (parseInt(F73, 10) == 6) {
+    fk_ocupaciones = 8;
+  } else if (parseInt(F73, 10) == 7) {
+    fk_ocupaciones = 10;
+  } else if (parseInt(F73, 10) == 8) {
+    fk_ocupaciones = 9;
+  }
+}
+
+&#47;&#47; fk_tiempo, fk_geografia, idPersona
+var fk_tiempo = parseInt(MES, 10);
+var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));
+var idPersona = parseInt(NPER, 10);</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>cantPersonas</name>
+        <rename>cantPersonas</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>cantAniosAprobados</name>
+        <rename>cantAniosAprobados</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>arrAniosAprobados</name>
+        <rename>arrAniosAprobados</rename>
         <type>String</type>
-        <format/>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>36</length>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>173</xloc>
-      <yloc>21</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SQL File Output</name>
-    <type>SQLFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ECH_DW</connection>
-    <schema/>
-    <table>ocupaciones</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;ocupaciones</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>394</xloc>
-      <yloc>21</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>salud</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;salud.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>&quot;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>idSalud</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>salud</name>
+        <replace>N</replace>
+      </field>      <field>        <name>i</name>
+        <rename>i</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>nivelEducacionAlcanzado</name>
+        <rename>nivelEducacionAlcanzado</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_educacion_alcanzada</name>
+        <rename>fk_educacion_alcanzada</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>nivelEducacionFinalizado</name>
+        <rename>nivelEducacionFinalizado</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>counter</name>
+        <rename>counter</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_educacion_finalizada</name>
+        <rename>fk_educacion_finalizada</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>arrIngresos</name>
+        <rename>arrIngresos</rename>
         <type>String</type>
-        <format/>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>31</length>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>173</xloc>
-      <yloc>90</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SQL File Output 2</name>
-    <type>SQLFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ECH_DW</connection>
-    <schema/>
-    <table>salud</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;salud</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>393</xloc>
-      <yloc>89</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>sexos</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;sexos.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>&quot;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>idSexos</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
+        <replace>N</replace>
+      </field>      <field>        <name>cantIngresos</name>
+        <rename>cantIngresos</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_sexos</name>
+        <rename>fk_sexos</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_edades</name>
+        <rename>fk_edades</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_salud</name>
+        <rename>fk_salud</rename>
+        <type>Number</type>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>sexo</name>
-        <type>String</type>
-        <format/>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>9</length>
+        <replace>N</replace>
+      </field>      <field>        <name>tiene_msp</name>
+        <rename>tiene_msp</rename>
+        <type>Boolean</type>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>571</xloc>
-      <yloc>14</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>edades</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;edades.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>&quot;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>idEdades</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
+        <replace>N</replace>
+      </field>      <field>        <name>tiene_iamc</name>
+        <rename>tiene_iamc</rename>
+        <type>Boolean</type>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>edad</name>
-        <type>String</type>
-        <format/>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>9</length>
+        <replace>N</replace>
+      </field>      <field>        <name>tiene_privado</name>
+        <rename>tiene_privado</rename>
+        <type>Boolean</type>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>572</xloc>
-      <yloc>87</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>educacion</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;educacion.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>&quot;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>idEducacion</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
+        <replace>N</replace>
+      </field>      <field>        <name>tiene_otro</name>
+        <rename>tiene_otro</rename>
+        <type>Boolean</type>
+        <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>tipo</name>
-        <type>String</type>
-        <format/>
-        <currency>NU$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>28</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_ocupaciones</name>
+        <rename>fk_ocupaciones</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_tiempo</name>
+        <rename>fk_tiempo</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>fk_geografia</name>
+        <rename>fk_geografia</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>idPersona</name>
+        <rename>idPersona</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>367</xloc>
-      <yloc>147</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SQL File Output 3</name>
-    <type>SQLFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ECH_DW</connection>
-    <schema>ECH_DW</schema>
-    <table>sexos</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;sexos</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>790</xloc>
-      <yloc>14</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SQL File Output 4</name>
-    <type>SQLFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ECH_DW</connection>
-    <schema>ECH_DW</schema>
-    <table>edades</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;edades</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>790</xloc>
-      <yloc>87</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SQL File Output 5</name>
-    <type>SQLFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ECH_DW</connection>
-    <schema>ECH_DW</schema>
-    <table>educacion</table>
-    <truncate>N</truncate>
-    <create>N</create>
-    <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;educacion</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>590</xloc>
-      <yloc>147</yloc>
+      <xloc>312</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4548,8 +4418,8 @@
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
-    <type>ScriptValueMod</type>
+    <name>SQL File Output</name>
+    <type>SQLFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -4557,260 +4427,226 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-&#47;&#47; cantPersonas
-var cantPersonas = 1;
-
-&#47;&#47; cantAniosAprobados
-var cantAniosAprobados = 0;
-var arrAniosAprobados  = [1, E51_1, E51_2, E51_3, E51_4, E51_5, E51_6, E51_7, E51_8, E51_9, E51_10, E51_11];
-
-for (var i=1; i&lt;arrAniosAprobados.length; i++) {
-    cantAniosAprobados = cantAniosAprobados + parseInt(arrAniosAprobados[i], 10);
-}
-
-&#47;&#47; fk_educacion_alcanzada
-var nivelEducacionAlcanzado;
-for (var i = 0; i&lt;arrAniosAprobados.length; i++){
-  if (parseInt(arrAniosAprobados[i], 10) != 0){
-    nivelEducacionAlcanzado = i;
-  }
-}
-nivelEducacionAlcanzado++; &#47;&#47; En la tabla no hay id 0
-var fk_educacion_alcanzada = nivelEducacionAlcanzado;
-
-&#47;&#47; fk_educacion_finalizada
-var nivelEducacionFinalizado = 0;
-if (parseInt(E53, 10) == 1) {
-  nivelEducacionFinalizado = nivelEducacionAlcanzado;
-} else if (parseInt(E53, 10) == 2){
-  var counter = 1;
-  for (var i=11; i&gt;=0; i--) {
-   if (counter &gt;= 0 &amp;&amp; parseInt(arrAniosAprobados[i], 10) != 0) {
-     counter--;
-     nivelEducacionFinalizado = i;
-   }
-  }
-  nivelEducacionFinalizado++;
-}
-var fk_educacion_finalizada = nivelEducacionFinalizado;
-
-&#47;&#47; cantIngresos
-var arrIngresos = [G126_1, G126_2, G126_3, G126_4, G126_5, G126_6, G126_7, G126_8, G127_3,
-G128_1, G129_2, G130_1, G131_1, G133_1, G133_2, G134_1, G134_2, G134_3, G134_4, G134_5, G134_6, G134_7, G134_8, G135_3,
-G136_1, G137_2, G138_1, G139_1, G141_1, G141_2, G142, G143, G144_1, G144_2_1, G144_2_2, G144_2_3, G144_2_4, G144_2_5,
-G145, G146, G147,
-G148_1_1, G148_1_2, G148_1_3, G148_1_4, G148_1_5, G148_1_6, G148_1_7, G148_1_8, G148_1_9, G148_1_10, G148_1_11,
-G148_2_1, G148_2_2, G148_2_3, G148_2_4, G148_2_5, G148_2_6, G148_2_7, G148_2_8, G148_2_9, G148_2_10, G148_2_11,
-G148_3, G148_4, G148_5_1, G148_5_2, G153_1, G153_2, G154_1];
-
-var cantIngresos = 0;
-for (var i=0; i&lt;arrIngresos.length; i++) {
-  cantIngresos += parseInt(arrIngresos[i], 10);
-};
-
-&#47;&#47; fk_sexos
-var fk_sexos = parseInt(E26, 10);
-
-&#47;&#47; fk_edades
-var fk_edades;
-if (parseInt(E27, 10) &lt;= 14) {
- fk_edades = 1;
-} else if (parseInt(E27, 10) &lt;= 18) {
- fk_edades = 2;
-} else if (parseInt(E27, 10) &lt;= 22) {
- fk_edades = 3;
-} else if (parseInt(E27, 10) &lt;= 30) {
- fk_edades = 4;
-} else if (parseInt(E27, 10) &lt;= 40) {
- fk_edades = 5;
-} else if (parseInt(E27, 10) &lt;= 50) {
- fk_edades = 6;
-} else if (parseInt(E27, 10) &lt;= 60) {
- fk_edades = 7;
-} else if (parseInt(E27, 10) &lt;= 70) {
- fk_edades = 8;
-} else {
- fk_edades = 9;
-}
-
-&#47;&#47; fk_salud
-var fk_salud;
-var tiene_msp = (parseInt(E45_1, 10) == 1);
-var tiene_iamc = (parseInt(E45_2, 10) == 1);
-var tiene_privado = (parseInt(E45_3, 10) == 1);
-var tiene_otro = (parseInt(E45_4, 10) == 1 || parseInt(E45_5, 10) == 1 || parseInt(E45_6, 10) == 1 || parseInt(E45_7, 10) == 1);
-if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_privado &amp;&amp; tiene_otro) {
- fk_salud = 4;
-} else if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_privado) {
- fk_salud = 3;
-} else if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_otro) {
- fk_salud = 5;
-} else if (tiene_iamc &amp;&amp; tiene_privado &amp;&amp; tiene_otro) {
- fk_salud = 11;
-} else if (tiene_msp &amp;&amp; tiene_privado &amp;&amp; tiene_otro) {
- fk_salud = 7;
-} else if (tiene_msp &amp;&amp; tiene_iamc) {
- fk_salud = 2;
-} else if (tiene_msp &amp;&amp; tiene_privado) {
- fk_salud = 6;
-} else if (tiene_msp &amp;&amp; tiene_otro) {
- fk_salud = 8;
-} else if (tiene_iamc &amp;&amp; tiene_privado) {
- fk_salud = 10;
-} else if (tiene_iamc &amp;&amp; tiene_otro) {
- fk_salud = 13;
-} else if (tiene_privado &amp;&amp; tiene_otro) {
- fk_salud = 14;
-} else if (tiene_msp) {
- fk_salud = 1;
-} else if (tiene_iamc) {
- fk_salud = 9;
-} else if (tiene_privado) {
- fk_salud = 13;
-} else if (tiene_otro) {
- fk_salud = 15;
-}
-
-&#47;&#47; fk_ocupaciones, fk_tiempo, fk_geografia
-var fk_ocupaciones = parseInt(F73, 10);
-var fk_tiempo = parseInt(MES, 10);
-var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>cantPersonas</name>
-        <rename>cantPersonas</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>cantAniosAprobados</name>
-        <rename>cantAniosAprobados</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>arrAniosAprobados</name>
-        <rename>arrAniosAprobados</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>i</name>
-        <rename>i</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>nivelEducacionAlcanzado</name>
-        <rename>nivelEducacionAlcanzado</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_educacion_alcanzada</name>
-        <rename>fk_educacion_alcanzada</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>nivelEducacionFinalizado</name>
-        <rename>nivelEducacionFinalizado</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>counter</name>
-        <rename>counter</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_educacion_finalizada</name>
-        <rename>fk_educacion_finalizada</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>arrIngresos</name>
-        <rename>arrIngresos</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>cantIngresos</name>
-        <rename>cantIngresos</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_sexos</name>
-        <rename>fk_sexos</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_edades</name>
-        <rename>fk_edades</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_salud</name>
-        <rename>fk_salud</rename>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>tiene_msp</name>
-        <rename>tiene_msp</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>tiene_iamc</name>
-        <rename>tiene_iamc</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>tiene_privado</name>
-        <rename>tiene_privado</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>tiene_otro</name>
-        <rename>tiene_otro</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_ocupaciones</name>
-        <rename>fk_ocupaciones</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_tiempo</name>
-        <rename>fk_tiempo</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>fk_geografia</name>
-        <rename>fk_geografia</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+    <connection>ECH_DW</connection>
+    <schema/>
+    <table>ocupaciones</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;ocupaciones</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>312</xloc>
-      <yloc>260</yloc>
+      <xloc>394</xloc>
+      <yloc>21</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SQL File Output 2</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema/>
+    <table>salud</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;salud</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>393</xloc>
+      <yloc>89</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SQL File Output 3</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema>ECH_DW</schema>
+    <table>sexos</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;sexos</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>790</xloc>
+      <yloc>14</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SQL File Output 4</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema>ECH_DW</schema>
+    <table>edades</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;edades</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>790</xloc>
+      <yloc>87</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SQL File Output 5</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema>ECH_DW</schema>
+    <table>educacion</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;educacion</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>590</xloc>
+      <yloc>147</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SQL File Output 6</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ECH_DW</connection>
+    <schema/>
+    <table>infoPersonas</table>
+    <truncate>N</truncate>
+    <create>N</create>
+    <encoding/>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;info_personas_2009</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>618</xloc>
+      <yloc>261</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4830,6 +4666,10 @@ var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));</jsScript_
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>fk_geografia</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>idPersona</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -4879,8 +4719,8 @@ var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));</jsScript_
     </step>
 
   <step>
-    <name>SQL File Output 6</name>
-    <type>SQLFileOutput</type>
+    <name>edades</name>
+    <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -4888,38 +4728,54 @@ var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));</jsScript_
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>ECH_DW</connection>
-    <schema/>
-    <table>infoPersonas</table>
-    <truncate>N</truncate>
-    <create>N</create>
+    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;edades.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
     <encoding/>
-    <dateformat/>
-    <addtoresult>N</addtoresult>
-    <startnewline>Y</startnewline>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}&#47;..&#47;cargas&#47;info_personas_2009</name>
-      <extention>sql</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <splitevery>0</splitevery>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      </file>
+    <fields>
+      <field>
+        <name>idEdades</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>edad</name>
+        <type>String</type>
+        <format/>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>9</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>618</xloc>
-      <yloc>261</yloc>
+      <xloc>572</xloc>
+      <yloc>87</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
+    <name>educacion</name>
+    <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -4927,21 +4783,212 @@ var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));</jsScript_
            <method>none</method>
            <schema_name/>
            </partitioning>
-<join_type>INNER</join_type>
-<step1>P2009_1</step1>
-<step2>P2009_2</step2>
-    <keys_1>
-      <key>NUMERO</key>
-      <key>NPER</key>
-    </keys_1>
-    <keys_2>
-      <key>NUMERO</key>
-      <key>NPER</key>
-    </keys_2>
+    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;educacion.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>idEducacion</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>tipo</name>
+        <type>String</type>
+        <format/>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>28</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>172</xloc>
-      <yloc>260</yloc>
+      <xloc>367</xloc>
+      <yloc>147</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ocupaciones</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;ocupaciones.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>idOcupaciones</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ocupacion</name>
+        <type>String</type>
+        <format/>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>173</xloc>
+      <yloc>21</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>salud</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;salud.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>idSalud</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>salud</name>
+        <type>String</type>
+        <format/>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>31</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>173</xloc>
+      <yloc>90</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>sexos</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>${Internal.Transformation.Filename.Directory}&#47;..&#47;files&#47;sexos.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>idSexos</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>sexo</name>
+        <type>String</type>
+        <format/>
+        <currency>NU$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>9</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>571</xloc>
+      <yloc>14</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
