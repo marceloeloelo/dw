@@ -71,6 +71,7 @@ DROP TABLE IF EXISTS `ECH_DW`.`infoPersonas` ;
 CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoPersonas` (
   `fk_sexos`           INT NOT NULL ,
   `fk_geografia`       INT NOT NULL ,
+  `idPersona`          INT NOT NULL ,
   `fk_educacion_alcanzada`       INT NOT NULL ,
   `fk_educacion_finalizada`       INT NOT NULL ,
   `fk_tiempo`          INT NOT NULL ,
@@ -88,7 +89,7 @@ CREATE  TABLE IF NOT EXISTS `ECH_DW`.`infoPersonas` (
   INDEX `fk_edades` (`fk_edades` ASC) ,
   INDEX `fk_salud` (`fk_salud` ASC) ,
   INDEX `fk_ocupaciones` (`fk_ocupaciones` ASC) ,
-  PRIMARY KEY (`fk_sexos`,`fk_geografia`,`fk_educacion_alcanzada`, `fk_educacion_finalizada`,`fk_tiempo`, `fk_edades`, `fk_salud`, `fk_ocupaciones`) ,
+  PRIMARY KEY (`fk_sexos`,`fk_geografia`, `idPersona`, `fk_educacion_alcanzada`, `fk_educacion_finalizada`,`fk_tiempo`, `fk_edades`, `fk_salud`, `fk_ocupaciones`) ,
   CONSTRAINT `fk_sexos`
     FOREIGN KEY (`fk_sexos` )
     REFERENCES `ECH_DW`.`sexos` (`idSexos` )
