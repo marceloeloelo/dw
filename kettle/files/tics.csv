@@ -1,0 +1,11 @@
+idTics;celular;usoInternet
+1;0;Al menos una vez al dia
+2;0;Al menos una vez a la semana, pero no todos los dias
+3;0;Al menos una vez al mes, pero no todas las semanas
+4;0;No sabe
+5;0;No usa
+6;1;Al menos una vez al dia
+7;1;Al menos una vez a la semana, pero no todos los dias
+8;1;Al menos una vez al mes, pero no todas las semanas
+9;1;No sabe
+10;1;No usa
