@@ -120,7 +120,7 @@
     <encoding/>
     <fields>
       <field>
-        <name>idOcupacion</name>
+        <name>idOcupaciones</name>
         <type>Integer</type>
         <format>#</format>
         <currency>NU$</currency>
@@ -308,7 +308,7 @@
     <encoding/>
     <fields>
       <field>
-        <name>idSexo</name>
+        <name>idSexos</name>
         <type>Integer</type>
         <format>#</format>
         <currency>NU$</currency>
@@ -4680,7 +4680,7 @@ if (tiene_msp &amp;&amp; tiene_iamc &amp;&amp; tiene_privado &amp;&amp; tiene_ot
 &#47;&#47; fk_ocupaciones, fk_tiempo, fk_geografia
 var fk_ocupaciones = parseInt(F73, 10);
 var fk_tiempo = parseInt(MES, 10);
-var fk_geografia = parseInt(NUMERO, 10);</jsScript_script>
+var fk_geografia = parseInt(&quot;2009&quot; + parseInt(NUMERO, 10));</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>cantPersonas</name>
         <rename>cantPersonas</rename>
         <type>Number</type>
