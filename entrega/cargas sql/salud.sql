@@ -1,0 +1,15 @@
+INSERT INTO salud(idSalud, salud) VALUES (1,'MSP');
+INSERT INTO salud(idSalud, salud) VALUES (2,'MSP - IAMC');
+INSERT INTO salud(idSalud, salud) VALUES (3,'MSP - IAMC - Privado');
+INSERT INTO salud(idSalud, salud) VALUES (4,'MSP - IAMC - Privado - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (5,'MSP - IAMC - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (6,'MSP - Privado');
+INSERT INTO salud(idSalud, salud) VALUES (7,'MSP - Privado - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (8,'MSP - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (9,'IAMC');
+INSERT INTO salud(idSalud, salud) VALUES (10,'IAMC - Privado');
+INSERT INTO salud(idSalud, salud) VALUES (11,'IAMC - Privado - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (12,'IAMC - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (13,'Privado');
+INSERT INTO salud(idSalud, salud) VALUES (14,'Privado - Otros');
+INSERT INTO salud(idSalud, salud) VALUES (15,'Otros');

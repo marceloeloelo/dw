@@ -1,0 +1,12 @@
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (1,'Ninguno');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (2,'Preescolar');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (3,'Primaria comun');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (4,'Primaria especial');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (5,'Ciclo Basico Liceo o UTU');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (6,'Bachillerato Secundario');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (7,'Bachillerato tecnologico UTU');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (8,'Ensenanza Tecnica');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (9,'Magisterio o profesorado');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (10,'Universidad o similar');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (11,'Terciario no universitario');
+INSERT INTO ECH_DW.educacion(idEducacion, tipo) VALUES (12,'Posgrado');
