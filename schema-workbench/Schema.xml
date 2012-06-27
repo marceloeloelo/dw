@@ -157,9 +157,13 @@
     <Hierarchy name="tics" visible="true" hasAll="true" primaryKey="idTics">
       <Table name="tics">
       </Table>
-      <Level name="tieneCelular" visible="true" table="tics" column="celular" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
       <Level name="usoInternet" visible="true" table="tics" column="usoInternet" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="tics_celular" visible="true" hasAll="true" primaryKey="idTics">
+      <Table name="tics">
+      </Table>
+      <Level name="tieneCelular" visible="true" table="tics" column="celular" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
