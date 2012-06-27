@@ -100,27 +100,27 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="ocupaciones">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ocupaciones">
     <Hierarchy name="ocupaciones" visible="true" hasAll="true" primaryKey="idOcupaciones">
-      <Table name="ocupaciones" alias="">
+      <Table name="ocupaciones">
       </Table>
-      <Level name="ocupacion" visible="true" table="ocupaciones" column="Ocupacion" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="ocupacion" visible="true" table="ocupaciones" column="Ocupacion" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="salud">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="salud">
     <Hierarchy name="salud" visible="true" hasAll="true" primaryKey="idSalud">
-      <Table name="salud" alias="">
+      <Table name="salud">
       </Table>
-      <Level name="salud" visible="true" table="salud" column="salud" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="salud" visible="true" table="salud" column="salud" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="sexos">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="sexos">
     <Hierarchy name="sexos" visible="true" hasAll="true" primaryKey="idSexos">
-      <Table name="sexos" alias="">
+      <Table name="sexos">
       </Table>
-      <Level name="sexo" visible="true" table="sexos" column="idSexos" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="sexo" visible="true" table="sexos" column="idSexos" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <KeyExpression>
           <SQL dialect="generic">
             <![CDATA[sexos.sexo]]>
@@ -129,53 +129,53 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="edades">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="edades">
     <Hierarchy name="edades" visible="true" hasAll="true" primaryKey="idEdades">
       <Table name="edades">
       </Table>
-      <Level name="edad" visible="true" table="edades" column="Edad" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="edad" visible="true" table="edades" column="Edad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="educacion_alcanzada">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="educacion_alcanzada">
     <Hierarchy name="educacion" visible="true" hasAll="true" primaryKey="idEducacion">
       <Table name="educacion">
       </Table>
-      <Level name="tipo" visible="true" table="educacion" column="tipo" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="tipo" visible="true" table="educacion" column="tipo" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="educacion_finalizada">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="educacion_finalizada">
     <Hierarchy name="educacion" visible="true" hasAll="true" primaryKey="idEducacion">
       <Table name="educacion">
       </Table>
-      <Level name="tipo" visible="true" table="educacion" column="tipo" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="tipo" visible="true" table="educacion" column="tipo" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="tics">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="tics">
     <Hierarchy name="tics" visible="true" hasAll="true" primaryKey="idTics">
       <Table name="tics">
       </Table>
-      <Level name="tieneCelular" visible="true" table="tics" column="celular" uniqueMembers="false">
+      <Level name="tieneCelular" visible="true" table="tics" column="celular" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level name="usoInternet" visible="true" table="tics" column="usoInternet" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="usoInternet" visible="true" table="tics" column="usoInternet" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="ascendencia_racial">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ascendencia_racial">
     <Hierarchy name="ascendencia racial" visible="true" hasAll="true" primaryKey="idAscendenciaRacial">
       <Table name="ascendenciaRacial">
       </Table>
-      <Level name="raza" visible="true" table="ascendenciaRacial" column="raza" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="raza" visible="true" table="ascendenciaRacial" column="raza" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="ingresos">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ingresos">
     <Hierarchy name="ingresos" visible="true" hasAll="true" primaryKey="idIngresos">
       <Table name="ingresos">
       </Table>
-      <Level name="rango" visible="true" table="ingresos" column="rango" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="rango" visible="true" table="ingresos" column="rango" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -208,23 +208,23 @@
     </Measure>
   </Cube>
   <Cube name="infoPersonas" visible="true" cache="true" enabled="true">
-    <Table name="infoPersonas" alias="">
+    <Table name="infoPersonas">
     </Table>
-    <DimensionUsage source="tiempo" name="tiempo" visible="true" foreignKey="fk_tiempo">
+    <DimensionUsage source="tiempo" name="tiempo" visible="true" foreignKey="fk_tiempo" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="geografia" name="geografia" visible="true" foreignKey="fk_geografia">
+    <DimensionUsage source="geografia" name="geografia" visible="true" foreignKey="fk_geografia" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="ocupaciones" name="ocupaciones" visible="true" foreignKey="fk_ocupaciones">
+    <DimensionUsage source="ocupaciones" name="ocupaciones" visible="true" foreignKey="fk_ocupaciones" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="salud" name="salud" visible="true" foreignKey="fk_salud">
+    <DimensionUsage source="salud" name="salud" visible="true" foreignKey="fk_salud" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="sexos" name="sexos" visible="true" foreignKey="fk_sexos">
+    <DimensionUsage source="sexos" name="sexos" visible="true" foreignKey="fk_sexos" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="edades" name="edades" visible="true" foreignKey="fk_edades">
+    <DimensionUsage source="edades" name="edades" visible="true" foreignKey="fk_edades" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="educacion_alcanzada" name="educacion_alcanzada" visible="true" foreignKey="fk_educacion_alcanzada">
+    <DimensionUsage source="educacion_alcanzada" name="educacion_alcanzada" visible="true" foreignKey="fk_educacion_alcanzada" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="educacion_finalizada" name="educacion_finalizada" visible="true" foreignKey="fk_educacion_finalizada">
+    <DimensionUsage source="educacion_finalizada" name="educacion_finalizada" visible="true" foreignKey="fk_educacion_finalizada" highCardinality="false">
     </DimensionUsage>
     <Measure name="cantPersonas" column="cantPersonas" datatype="Numeric" aggregator="sum" visible="true">
     </Measure>
@@ -236,17 +236,17 @@
   <Cube name="infoTecnologias" visible="true" cache="true" enabled="true">
     <Table name="infoTecnologias">
     </Table>
-    <DimensionUsage source="geografia" name="geografia" visible="true" foreignKey="idGeografia">
+    <DimensionUsage source="geografia" name="geografia" visible="true" foreignKey="fk_geografia" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="tics" name="tics" visible="true" foreignKey="fk_tics">
+    <DimensionUsage source="tics" name="tics" visible="true" foreignKey="fk_tics" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="educacion_finalizada" name="educacion" visible="true" foreignKey="fk_educacion">
+    <DimensionUsage source="educacion_finalizada" name="educacion" visible="true" foreignKey="fk_educacion" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="tiempo" name="tiempo" visible="true" foreignKey="fk_tiempo">
+    <DimensionUsage source="tiempo" name="tiempo" visible="true" foreignKey="fk_tiempo" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="sexos" name="sexos" visible="true" foreignKey="fk_sexos">
+    <DimensionUsage source="sexos" name="sexos" visible="true" foreignKey="fk_sexos" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="edades" name="edades" visible="true" foreignKey="fk_edades">
+    <DimensionUsage source="edades" name="edades" visible="true" foreignKey="fk_edades" highCardinality="false">
     </DimensionUsage>
     <Measure name="cantPersonas" column="cantPersonas" aggregator="sum" visible="true">
     </Measure>
@@ -254,15 +254,15 @@
   <Cube name="infoIngresoRacial" visible="true" cache="true" enabled="true">
     <Table name="infoIngresoRacial">
     </Table>
-    <DimensionUsage source="tiempo" name="tiempo" visible="true" foreignKey="idTiempo">
+    <DimensionUsage source="tiempo" name="tiempo" visible="true" foreignKey="fk_tiempo" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="ascendencia_racial" name="ascendencia racial" visible="true" foreignKey="fk_ascendencia_racial">
+    <DimensionUsage source="ascendencia_racial" name="ascendencia racial" visible="true" foreignKey="fk_ascendencia_racial" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="ingresos" name="ingresos" visible="true" foreignKey="fk_ingresos">
+    <DimensionUsage source="ingresos" name="ingresos" visible="true" foreignKey="fk_ingresos" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="ocupaciones" name="ocupaciones" visible="true" foreignKey="fk_ocupaciones">
+    <DimensionUsage source="ocupaciones" name="ocupaciones" visible="true" foreignKey="fk_ocupaciones" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="geografia" name="geografia" visible="true" foreignKey="fk_geografia">
+    <DimensionUsage source="geografia" name="geografia" visible="true" foreignKey="fk_geografia" highCardinality="false">
     </DimensionUsage>
     <Measure name="cantPersonas" column="cantPersonas" aggregator="sum" visible="true">
     </Measure>
