@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>Diseño y Construcctión de DataWarehouse</title>
+
+    <meta charset='utf-8'>
+    <script src='http://html5slides.googlecode.com/svn/trunk/slides.js'></script>
+  </head>
+
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+
+
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular'>
+
+      <article>
+        <h1>Diseño y Construcción de DataWarehouse</h1>
+        <p>
+          Marcelo Casiraghi<br>
+          Martín Rodríguez Blanco<br>
+          10 de Julio de 2012
+        </p>
+      </article>
+
+      <article class='current'>
+        <h3>Contenido:</h3>
+        <ol class="build">
+          <li>Diseño Conceptual</li>
+          <li>Diseño Lógico</li>
+          <li>Implementación de relaciones dimensionales y dimensiones</li>
+          <li>Proceso de carga</li>
+          <li>Reportes</li>
+        </ol>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article>
+        <h2>1. Diseño Conceptual</h2>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article>
+        <h3>Dimensión Geografía</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_geografia.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Dimensión Tiempo</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_tiempo.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Dimensión Niveles de Confort</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_niveles_confort.png'>
+        </p>
+        <br><br>
+        <h3>Dimensión Tipos de Vivienda</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_tipos_vivienda.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Relación Dimensional 'Información de Hogares'</h3>
+        <p>
+          <img class='centered' src='pictures/rel_dim_informacion_de_hogares.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Dimensión Ocupaciones</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_ocupaciones.png'>
+        </p>
+        <br><br>
+        <h3>Dimensión Educación</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_educacion.png'>
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>Dimensión Salud</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_salud.png'>
+        </p>
+        <br><br>
+        <h3>Dimensión Sexos</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_sexos.png'>
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>Relación Dimensional 'Información de Personas'</h3>
+        <p>
+          <img class='centered' src='pictures/rel_dim_informacion_de_personas.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Dimensión Tics</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_tics.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Relación Dimensional 'Información de Tics'</h3>
+        <p>
+          <img class='centered' src='pictures/rel_dim_informacion_de_tics.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Dimensión Ascendencia Racial</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_ascendencia_racial.png'>
+        </p>
+        <br><br>
+        <h3>Dimensión Rango de Ingresos</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/dimension_rango_de_ingresos.png'>
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>Relación Dimensional 'Información de Ingreso Racial'</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/rel_dim_informacion_de_ingreso_racial.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article>
+        <h2>2. Diseño Lógico</h2>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='current'>
+        <h3>Diseño Lógico</h3>
+        <ul class='build'>
+          <li>Servidor OLAP Mondrian de tipo ROLAP.</li>
+          <li>MySQL Workbench para crear diagramas de tablas.</li>
+          <li>No se realizó fragmentación vertical ni horizontal.</li>
+          <li>Esquema estrella para tabla de hechos.</li>
+        </ul>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Información de Hogares</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/esquema_estrella_informacion_de_hogares.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article>
+        <h2>3. Implementación de Relaciones Dimensionales y Dimensiones</h2>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='current'>
+        <h3>Implementación de Relaciones Dimensionales y Dimensiones</h3>
+        <ul class='build'>
+          <li>Base de datos ECH_DW.</li>
+          <li>Carga con scripts autogenerados por MySQL Workbench.</li>
+          <li>Con Kettle cargamos datos en ECH_DW.</li>
+          <li>Schema Workbench para diseño de cubos.</li>
+        </ul>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>Diseño de cubos con Schema Workbench</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/schema_workbench.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article>
+        <h2>4. Proceso de Carga</h2>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='current'>
+        <h3>Proceso de carga</h3>
+        <ul class='build'>
+          <li>Herramienta Kettle de Pentaho.</li>
+          <li>Creación de transformaciones con steps.</li>
+          <li>Algoritmos de carga en los steps JavaScript.</li>
+        </ul>
+        <br>
+        <p class='build'>
+          <img class='centered' src='pictures/kettle_example.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='current'>
+        <h3>Proceso de carga</h3>
+        <pre>
+var idGeografia = parseInt(&apos;2009&apos; + parseInt(NUMERO, 10));
+var idHogar = parseInt(NUMERO, 10);
+
+var idBarrio;
+var nombreBarrio;
+if (parseInt(BARRIO, 10) == 0){
+  idBarrio = nombreBarrio = null;
+} else{
+  idBarrio = parseInt(BARRIO, 10);
+  nombreBarrio = NOMBARRIO;
+}
+
+var idCCZ;
+if (parseInt(CCZ, 10) == 0){
+  idCCZ = null;
+} else{
+  idCCZ = parseInt(CCZ, 10);
+}
+        </pre>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article>
+        <h2>5. Reportes</h2>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+      <article class='current'>
+        <h3>Reportes</h3>
+        <br>
+        <p>
+          <img class='centered' src='pictures/reportes.png'>
+        </p>
+        <div class='source'>
+          Diseño y Construcción de DataWarehouse. InCo - FIng - UDeLaR
+        </div>
+      </article>
+
+    </section>
+
+  </body>
+</html>
